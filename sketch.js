@@ -2,6 +2,7 @@ var canvas;
 var music;
 var a,b,c,d;
 var box;
+var edges;
 
 function preload(){
     music = loadSound("music.mp3");
@@ -25,20 +26,23 @@ function setup(){
     d.shapeColor = "cyan";
 
     //create box sprite and give velocity
-    box = createSprite(random(20,750)),25,25;
+    box = createSprite(random(20,750),25,25);
     box.velocityY= -2;
-    box.shapeColor = white;
+    box.velocityX = -5;
+    box.shapeColor = "white";
 
 }
 
 function draw() {
     background(rgb(169,169,169));
     //create edgeSprite
-    createEdgeSprites();
-    box.bounceOff(topEdge);
-    box.bounceOff(bottomEdge);
-    box.bounceOff(leftEdge);
-    box.bounceOff(rightEdge);
+    
+    edges = createEdgeSprites();
+
+    box.bounceOff(edges);
+   // box.bounceOff(bottomEdge);
+  //  box.bounceOff(leftEdge);
+  //  box.bounceOff(rightEdge);
 
 
     if(box.isTouching(a)){
@@ -56,7 +60,7 @@ function draw() {
     if(box.isTouching(d)){
         box.shapeColor= d.shapeColor;
     }
- drawsprites();
+ drawSprites();
 
     //add condition to check if box touching surface and make it box
 
